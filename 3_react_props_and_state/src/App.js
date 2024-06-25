@@ -30,14 +30,8 @@ class Book extends PureComponent {
 class BookList extends Component {
   constructor(props) {
     super(props);
-    const books = [
-      <Book {...{ title: 'Book 1', author: 'Author 1', year: 2020 }}/>,
-      <Book {...{ title: 'Book 2', author: 'Author 2', year: 2018 }}/>,
-      <Book {...{ title: 'Book 3', author: 'Author 3', year: 2022 }}/>
-      // Add more books if you'd like
-    ];
     this.state = {
-      books: books
+      books: []
     };
     this.addBookHandler = this.addBookHandler.bind(this);
   }
@@ -52,8 +46,8 @@ class BookList extends Component {
   render() {
     return (
       <div>
-        <BookForm addBookHandler={this.addBookHandler} />
-        {this.state.books.map((book, index) => <li className='Booklist' key={index}>{book}</li>)}
+        <BookForm handleSubmit={this.addBookHandler} />
+        {this.state.books.length>0 ? this.state.books.map((book, index) => <li className='Booklist' key={index}>{book}</li>) : "Book list is currently empty!!!"}
       </div>
     );
   }

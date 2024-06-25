@@ -17,7 +17,7 @@ function BookForm(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        props.addBookHandler(bookDetails);
+        props.handleSubmit(bookDetails);
     }
 
     return (
