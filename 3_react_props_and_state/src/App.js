@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { Component, PureComponent } from 'react';
-import WithLogging from './components/HOC_Logger'
+import WithLogging from './components/HOC_Logger';
+import BookForm from './components/Form_Book';
 
 function BookDetail(props) {
   return (
@@ -38,10 +39,23 @@ class BookList extends Component {
     this.state = {
       books: books
     };
+    this.addBookHandler = this.addBookHandler.bind(this);
+  }
+
+  addBookHandler(bookDetails) {
+    const newBook = <Book {...bookDetails} />;
+    this.setState((prevState) => ({
+      books: [...prevState.books, newBook]
+    }));
   }
 
   render() {
-    return this.state.books.map((book, index) => <li className='Booklist' key={index}>{book}</li>);
+    return (
+      <div>
+        <BookForm addBookHandler={this.addBookHandler} />
+        {this.state.books.map((book, index) => <li className='Booklist' key={index}>{book}</li>)}
+      </div>
+    );
   }
 }
 
