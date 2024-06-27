@@ -1,0 +1,22 @@
+.Book {
+    color: darkgray;
+    font-weight: bold;
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.Book-title {
+    color: grey;
+}
+
+.Book-author {
+    padding-left: 10px;
+}
+
+.Book-year {
+    padding-left: 10px;
+}
+
+.Booklist {
+    list-style-type: none;
+}
