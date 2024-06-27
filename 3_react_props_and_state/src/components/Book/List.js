@@ -9,11 +9,18 @@ class BookList extends Component {
       books: []
     };
     this.addBookHandler = this.addBookHandler.bind(this);
+    this.deleteBookHandler = this.deleteBookHandler.bind(this);
   }
 
   addBookHandler(bookDetails) {
     this.setState((prevState) => ({
       books: [...prevState.books, bookDetails]
+    }));
+  }
+
+  deleteBookHandler(index) {
+    this.setState((prevState) => ({
+      books: prevState.books.filter((bookDetails, i) => i != index)
     }));
   }
 
@@ -24,7 +31,7 @@ class BookList extends Component {
         {this.state.books.length>0 ? 
           this.state.books.map((bookDetails, index) => 
             <li className='Booklist' key={index}>
-              <Book {...bookDetails} />
+              <Book {...bookDetails} index={index} deleteHandler={this.deleteBookHandler} />
             </li>
           ) 
           : "Book list is currently empty!!!"}

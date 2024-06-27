@@ -10,6 +10,7 @@ class Book extends PureComponent {
         return (
             <div className='Book'>
                 <BookDetail {...this.props} />
+                <button onClick={() => this.props.deleteHandler(this.props.index)}>Delete</button>
             </div>
         );
     }
