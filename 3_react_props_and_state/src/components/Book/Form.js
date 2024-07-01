@@ -4,7 +4,12 @@ function BookForm(props) {
     const [bookDetails, setBookDetails] = useState({
         title: '',
         author: '',
-        year: 0
+        year: 0,
+        additionalDetails: {
+            'description': '',
+            'genre': '',
+            'abc': ''
+        }
     });
 
     function handleInputChange(event) {
@@ -18,6 +23,17 @@ function BookForm(props) {
     function handleSubmit(event) {
         event.preventDefault();
         props.handleSubmit(bookDetails);
+    }
+
+    function handleAdditionalInputChange(event) {
+        const { name, value } = event.target;
+        setBookDetails({
+            ...bookDetails,
+            additionalDetails: {
+                ...bookDetails.additionalDetails,
+                [name]: value
+            }
+        });
     }
 
     return (
@@ -53,6 +69,20 @@ function BookForm(props) {
                 />
             </label>
             <br />
+                Additional Details:
+                <br />
+                {Object.entries(bookDetails.additionalDetails).map(([key, value], index) => (
+                    <div key={index}>
+                        <label>{key}: </label>
+                        <input 
+                            type="text"
+                            name={key} 
+                            value={value}
+                            onChange={handleAdditionalInputChange} 
+                        />
+                    </div>
+                ))}
+            <br/>
             <button type="submit">Submit</button>
             </form>
         </div>
