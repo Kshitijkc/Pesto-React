@@ -1,4 +1,4 @@
-import { PureComponent } from "react";
+import React, { PureComponent } from "react";
 import BookDetail from "./Details";
 
 class Book extends PureComponent {
