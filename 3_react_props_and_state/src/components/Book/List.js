@@ -20,7 +20,7 @@ class BookList extends Component {
 
   deleteBookHandler(index) {
     this.setState((prevState) => ({
-      books: prevState.books.filter((bookDetails, i) => i != index)
+      books: prevState.books.filter((bookDetails, i) => i !== index)
     }));
   }
 
