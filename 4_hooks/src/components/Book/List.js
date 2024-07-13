@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Book from "./Book";
 import BookForm from "./Form";
+import BookDataLoader from './Loader'
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -43,6 +44,7 @@ function BookList() {
 
   return (
     <>
+      <BookDataLoader updateBooks={updateBooks} />
       <BookForm handleSubmit={addBookHandler} />
       <BookDetailsTable books={books} deleteBookHandler={deleteBookHandler} />
     </>
