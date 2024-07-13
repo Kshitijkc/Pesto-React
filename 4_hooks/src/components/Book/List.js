@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import { useState } from "react";
 import Book from "./Book";
 import BookForm from "./Form";
 import TableContainer from '@mui/material/TableContainer';
@@ -30,36 +30,23 @@ function BookDetailsTable({ books, deleteBookHandler }) {
     : <div style={{marginTop: "40px"}}>Book list is currently empty!!!</div>;
 }
 
-class BookList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: []
-    };
-    this.addBookHandler = this.addBookHandler.bind(this);
-    this.deleteBookHandler = this.deleteBookHandler.bind(this);
+function BookList() {
+  const [books, updateBooks] = useState([]);
+
+  function addBookHandler(bookDetails) {
+    updateBooks((books) => ([...books, bookDetails]));
   }
 
-  addBookHandler(bookDetails) {
-    this.setState((prevState) => ({
-      books: [...prevState.books, bookDetails]
-    }));
+  function deleteBookHandler(index) {
+    updateBooks((books) => books.filter((bookDetails, i) => i !== index));
   }
 
-  deleteBookHandler(index) {
-    this.setState((prevState) => ({
-      books: prevState.books.filter((bookDetails, i) => i !== index)
-    }));
-  }
-
-  render() {
-    return (
-      <>
-        <BookForm handleSubmit={this.addBookHandler} />
-        <BookDetailsTable books={this.state.books} deleteBookHandler={this.deleteBookHandler} />
-      </>
-    );
-  }
+  return (
+    <>
+      <BookForm handleSubmit={addBookHandler} />
+      <BookDetailsTable books={books} deleteBookHandler={deleteBookHandler} />
+    </>
+  );
 }
 
 export default BookList;
