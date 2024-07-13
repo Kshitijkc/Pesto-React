@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import SaveIcon from '@mui/icons-material/Save';
+import './styles.css';
 
 function BookForm(props) {
     const [bookDetails, setBookDetails] = useState({
@@ -37,55 +41,19 @@ function BookForm(props) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-            <label>
-                Title:
-                <input
-                type="text"
-                name="title"
-                value={bookDetails.title}
-                onChange={handleInputChange}
-                />
-            </label>
-            <br />
-            <label>
-                Author:
-                <input
-                type="text"
-                name="author"
-                value={bookDetails.author}
-                onChange={handleInputChange}
-                />
-            </label>
-            <br />
-            <label>
-                Year:
-                <input
-                type="number"
-                name="year"
-                value={bookDetails.year}
-                onChange={handleInputChange}
-                />
-            </label>
-            <br />
+        <>
+            <form className="form-book">
+                <TextField id="filled-basic" label="Title" variant="standard" onChange={handleInputChange} name="title" />
+                <TextField id="filled-basic" label="Author" variant="standard" onChange={handleInputChange} name="author" />
+                <TextField id="filled-basic" label="Year" variant="standard" type="number" onChange={handleInputChange} name="year" />
                 Additional Details:
-                <br />
                 {Object.entries(bookDetails.additionalDetails).map(([key, value], index) => (
-                    <div key={index}>
-                        <label>{key}: </label>
-                        <input 
-                            type="text"
-                            name={key} 
-                            value={value}
-                            onChange={handleAdditionalInputChange} 
-                        />
-                    </div>
+                    <TextField id="filled-basic" label={key.charAt(0).toUpperCase() + key.slice(1)} variant="standard" onChange={handleAdditionalInputChange} key={index} name={key} />
                 ))}
-            <br/>
-            <button type="submit">Submit</button>
+                <br/>
+                <Button variant="contained" endIcon={<SaveIcon />} onClick={handleSubmit} ></Button>
             </form>
-        </div>
+        </>
     );
 }
 
