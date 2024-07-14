@@ -2,6 +2,7 @@ import { useState } from "react";
 import Book from "./Book";
 import BookForm from "./Form";
 import BookDataLoader from './Loader'
+import useBookFilter from "./Hooks";
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -9,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
+import TextField from '@mui/material/TextField';
 
 function BookDetailsTable({ books, deleteBookHandler }) {
   return books.length>0 ? 
@@ -33,6 +35,8 @@ function BookDetailsTable({ books, deleteBookHandler }) {
 
 function BookList() {
   const [books, updateBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const filteredBooks = useBookFilter(books, searchTerm);
 
   function addBookHandler(bookDetails) {
     updateBooks((books) => ([...books, bookDetails]));
@@ -46,7 +50,15 @@ function BookList() {
     <>
       <BookDataLoader updateBooks={updateBooks} />
       <BookForm handleSubmit={addBookHandler} />
-      <BookDetailsTable books={books} deleteBookHandler={deleteBookHandler} />
+      <TextField 
+        label="Search" 
+        id="outlined-size-small" 
+        placeholder="Search by title or author" 
+        value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} 
+        size="small" 
+        style={{marginTop: 40, width: 300}}
+      />
+      <BookDetailsTable books={filteredBooks} deleteBookHandler={deleteBookHandler} />
     </>
   );
 }
