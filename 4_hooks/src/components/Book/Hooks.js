@@ -12,3 +12,19 @@ function useBookFilter(books, searchTerm) {
 }
 
 export default useBookFilter;
+
+export function useBookSorter(books, sortCriteria) {
+    const sortedBooks = useMemo(() => {
+      return [...books].sort((a, b) => {
+        if (sortCriteria === 'title') {
+          return a.title.localeCompare(b.title);
+        } else if (sortCriteria === 'author') {
+          return a.author.localeCompare(b.author);
+        } else {
+          return 0;
+        }
+      });
+    }, [books, sortCriteria]);
+  
+    return sortedBooks;
+}

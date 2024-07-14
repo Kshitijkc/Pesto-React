@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import Book from "./Book";
 import BookForm from "./Form";
 import BookDataLoader from './Loader'
-import useBookFilter from "./Hooks";
+import useBookFilter, { useBookSorter } from "./Hooks";
 import ThemeContext from "./ThemeContext";
 import ThemeSwitcher from './ThemeSwitcher';
 import TableContainer from '@mui/material/TableContainer';
@@ -38,7 +38,9 @@ function BookDetailsTable({ books, deleteBookHandler, style }) {
 function BookList() {
   const [books, updateBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortCriteria, setSortCriteria] = useState('title');
   const filteredBooks = useBookFilter(books, searchTerm);
+  const sortedBooks = useBookSorter(filteredBooks, sortCriteria);
   const { theme } = useContext(ThemeContext);
   
   const bookListStyle = {
@@ -67,7 +69,7 @@ function BookList() {
         size="small" 
         style={{marginTop: 40, width: 300}}
       />
-      <BookDetailsTable books={filteredBooks} deleteBookHandler={deleteBookHandler} style={bookListStyle} />
+      <BookDetailsTable books={sortedBooks} deleteBookHandler={deleteBookHandler} style={bookListStyle} />
     </>
   );
 }
