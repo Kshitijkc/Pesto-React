@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 function useBookFilter(books, searchTerm) {
     const filteredBooks = useMemo(() => {

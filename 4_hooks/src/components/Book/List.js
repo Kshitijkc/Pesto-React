@@ -38,7 +38,7 @@ function BookDetailsTable({ books, deleteBookHandler, style }) {
 function BookList() {
   const [books, updateBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortCriteria, setSortCriteria] = useState('title');
+  const [sortCriteria] = useState('title');
   const filteredBooks = useBookFilter(books, searchTerm);
   const sortedBooks = useBookSorter(filteredBooks, sortCriteria);
   const { theme } = useContext(ThemeContext);
