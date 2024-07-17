@@ -1,5 +1,4 @@
 import React from 'react';
-// import './Home.css'; // Create a CSS file for styling
 
 const Home = () => {
   return (
